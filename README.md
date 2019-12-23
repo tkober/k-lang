@@ -3,7 +3,7 @@
 ---
 ###### Table of Contents
 
-__1.&ensp;[Preamble](#preamble)__  
+__1.&emsp;[Preamble](#preamble)__  
 &emsp;&ensp;1.1&ensp;[About Me](#about-me)  
 &emsp;&ensp;1.2&ensp;[Motivation](#motivation)  
 
