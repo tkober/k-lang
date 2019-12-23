@@ -3,11 +3,11 @@
 ---
 ###### Table of Contents
 
-__1.&nbsp; [Preamble](#1-preamble)__  
+__1.&ensp;[Preamble](#1-preamble)__  
 &ensp;&ensp; 1.1&ensp;[About Me](#11-about-me)  
 &ensp;&ensp; 1.2&ensp;[Motivation](#12-motivation)  
 
-__2.&nbsp; [Introduction to Compilers](#2-introduction-to-compilers)__  
+__2.&ensp;[Introduction to Compilers](#2-introduction-to-compilers)__  
 &ensp;&ensp; 2.1&ensp;[Tokenization](#21-tokenization)  
 &ensp;&ensp; 2.2&ensp;[Lexical Scanner](#22-lexical-scanner)  
 &ensp;&ensp; 2.3&ensp;[Gramma](#23-gramma)  
@@ -32,71 +32,71 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler)__
 
 ---
 
-## 1. Preamble
+## 1.&nbsp; Preamble
 [...]
 
-### 1.1 About Me
+### 1.1&nbsp; About Me
 [...]
 
-### 1.2 Motivation
-[...]
-
-
-## 2. Introduction to Compilers
-[...]
-
-### 2.1 Tokenization
-[...]
-
-### 2.2 Lexical Scanner
-[...]
-
-### 2.3 Gramma
-[...]
-
-### 2.4 Parser
-[...]
-
-### 2.5 Abstract Syntax Trees
-[...]
-
-### 2.6 Semantic Analysis
-[...]
-
-### 2.7 Intermediate Representation
-[...]
-
-### 2.8 Static Analysis and Optimization
-[...]
-
-### 2.9 Code Generation
+### 1.2&nbsp; Motivation
 [...]
 
 
-## 3. K-Language Design
+## 2.&nbsp; Introduction to Compilers
 [...]
 
-## 4. K-Language Specification
+### 2.1&nbsp; Tokenization
 [...]
 
-### 4.1 Reserved Words
+### 2.2&nbsp; Lexical Scanner
 [...]
 
-### 4.2 Types
+### 2.3&nbsp; Gramma
 [...]
 
-### 4.3 Operators
+### 2.4&nbsp; Parser
 [...]
 
-### 4.4 Control Structures
+### 2.5&nbsp; Abstract Syntax Trees
 [...]
 
-### 4.5 Functions
+### 2.6&nbsp; Semantic Analysis
 [...]
 
-### 4.6 Object Types
+### 2.7&nbsp; Intermediate Representation
+[...]
+
+### 2.8&nbsp; Static Analysis and Optimization
+[...]
+
+### 2.9&nbsp; Code Generation
 [...]
 
 
-## 5. The K-Compiler
+## 3.&nbsp; K-Language Design
+[...]
+
+## 4.&nbsp; K-Language Specification
+[...]
+
+### 4.1&nbsp; Reserved Words
+[...]
+
+### 4.2&nbsp; Types
+[...]
+
+### 4.3&nbsp; Operators
+[...]
+
+### 4.4&nbsp; Control Structures
+[...]
+
+### 4.5&nbsp; Functions
+[...]
+
+### 4.6&nbsp; Object Types
+[...]
+
+
+## 5.&nbsp; The K-Compiler
 [...]
