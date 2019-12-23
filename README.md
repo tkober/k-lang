@@ -3,12 +3,12 @@
 ---
 ###### Table of Contents
 
-__1.&emsp;[Preamble](#preamble)__  
-&emsp;&ensp;1.1&ensp;[About Me](#about-me)  
-&emsp;&ensp;1.2&ensp;[Motivation](#motivation)  
+__1.&ensp;[Preamble](#preamble)__  
+&ensp;&ensp;1.1&ensp;[About Me](#about-me)  
+&ensp;&ensp;1.2&ensp;[Motivation](#motivation)  
 
 __2.&ensp;[Introduction to Compilers](#introduction-to-compilers)__  
-&emsp;&ensp;2.1&ensp;[Tokenization](#tokenization)  
+&ensp;&ensp;2.1&ensp;[Tokenization](#tokenization)  
 &ensp;&ensp;2.2&ensp;[Lexical Scanner](#lexical-scanner)  
 &ensp;&ensp;2.3&ensp;[Gramma](#gramma)  
 &ensp;&ensp;2.4&ensp;[Parser](#parser)  
