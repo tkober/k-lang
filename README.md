@@ -4,13 +4,13 @@
 ###### Table of Contents
 
 __1&ensp;[Preamble](#1-preamble-ˆ)__  
-&ensp;&ensp; 1.1&ensp;[About Me](#11-about-me-ˆ)  
-&ensp;&ensp; 1.2&ensp;[Motivation](#12-motivation-ˆ)  
+&ensp;&ensp;1.1&ensp;[About Me](#11-about-me-ˆ)  
+&ensp;&ensp;1.2&ensp;[Motivation](#12-motivation-ˆ)  
 
 __2&ensp;[Introduction to Compilers](#2-introduction-to-compilers-ˆ)__  
-&ensp;&ensp; 2.1&ensp;[Tokenization](#21-tokenization-ˆ)  
-&ensp;&ensp; 2.2&ensp;[Lexical Scanner](#22-lexical-scanner-ˆ)  
-&ensp;&ensp; 2.3&ensp;[Gramma](#23-gramma-ˆ)  
+&ensp;&ensp;2.1&ensp;[Tokenization](#21-tokenization-ˆ)  
+&ensp;&ensp;2.2&ensp;[Lexical Scanner](#22-lexical-scanner-ˆ)  
+&ensp;&ensp;2.3&ensp;[Gramma](#23-gramma-ˆ)  
 &ensp;&ensp; 2.4&ensp;[Parser](#24-parser-ˆ)  
 &ensp;&ensp; 2.5&ensp;[Abstract Syntax Trees](#25-abstract-syntax-trees-ˆ)  
 &ensp;&ensp; 2.6&ensp;[Semantic Analysis](#26-semantic-analysis-ˆ)  
@@ -21,7 +21,7 @@ __2&ensp;[Introduction to Compilers](#2-introduction-to-compilers-ˆ)__
 __3&ensp;[K-Language Design](#3-k-language-design-ˆ)__  
 
 __4&ensp;[K-Language Specification](#4-k-language-specification-ˆ)__  
-&ensp;&ensp; 4.1&ensp;[Reserved Words](#41-reserved-words-ˆ)  
+&ensp;&ensp;4.1&ensp;[Reserved Words](#41-reserved-words-ˆ)  
 &ensp;&ensp; 4.2&ensp;[Types](#42-types-ˆ)  
 &ensp;&ensp; 4.3&ensp;[Operators](#43-operators-ˆ)  
 &ensp;&ensp; 4.4&ensp;[Control Structures](#44-control-structures-ˆ)  
