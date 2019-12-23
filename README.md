@@ -22,7 +22,7 @@ __3.&ensp;[K-Language Design](#k-language-design)__
 
 __4.&ensp;[K-Language Specification](#k-language-specification)__  
 &nbsp;&ensp;&ensp;4.1&ensp;[Reserved Words](#reserved-words)  
-&nbsp;&ensp;&ensp; 4.2&ensp;[Types](#types)  
+&ensp;&ensp; 4.2&ensp;[Types](#types)  
 &nbsp;&ensp;&ensp;4.3&ensp;[Operators](#operators)  
 &nbsp;&ensp;&ensp;4.4&ensp;[Control Structures](#control-structures)  
 &nbsp;&ensp;&ensp;4.5&ensp;[Functions](#functions)  
