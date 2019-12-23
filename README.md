@@ -3,100 +3,100 @@
 ---
 ###### Table of Contents
 
-__1.&ensp;[Preamble](#preamble)__  
-&ensp;&ensp; 1.1&ensp;[About Me](#about-me)  
-&ensp;&ensp; 1.2&ensp;[Motivation](#motivation)  
+__1.&ensp;[Preamble](#1-preamble)__  
+&ensp;&ensp; 1.1&ensp;[About Me](#1-1-about-me)  
+&ensp;&ensp; 1.2&ensp;[Motivation](#1-2-motivation)  
 
-__2.&ensp;[Introduction to Compilers](#introduction-to-compilers)__  
-&ensp;&ensp; 2.1&ensp;[Tokenization](#tokenization)  
-&ensp;&ensp; 2.2&ensp;[Lexical Scanner](#lexical-scanner)  
-&ensp;&ensp; 2.3&ensp;[Gramma](#gramma)  
-&ensp;&ensp; 2.4&ensp;[Parser](#parser)  
-&ensp;&ensp; 2.5&ensp;[Abstract Syntax Trees](#abstract-syntax-trees)  
-&ensp;&ensp; 2.6&ensp;[Semantic Analysis](#semantic-analysis)  
-&ensp;&ensp; 2.7&ensp;[Intermediate Representation](#intermediate-representation)  
-&ensp;&ensp; 2.8&ensp;[Static Analysis and Optimization](#static-analysis-and-optimization)  
-&ensp;&ensp; 2.9&ensp; [Code Generation](#code-generation)  
+__2.&ensp;[Introduction to Compilers](#2-introduction-to-compilers)__  
+&ensp;&ensp; 2.1&ensp;[Tokenization](#2-1-tokenization)  
+&ensp;&ensp; 2.2&ensp;[Lexical Scanner](#2-2-lexical-scanner)  
+&ensp;&ensp; 2.3&ensp;[Gramma](#2-3-gramma)  
+&ensp;&ensp; 2.4&ensp;[Parser](#2-4-parser)  
+&ensp;&ensp; 2.5&ensp;[Abstract Syntax Trees](#2-5-abstract-syntax-trees)  
+&ensp;&ensp; 2.6&ensp;[Semantic Analysis](#2-6-semantic-analysis)  
+&ensp;&ensp; 2.7&ensp;[Intermediate Representation](#2-7-intermediate-representation)  
+&ensp;&ensp; 2.8&ensp;[Static Analysis and Optimization](#2-8-static-analysis-and-optimization)  
+&ensp;&ensp; 2.9&ensp; [Code Generation](#2-9-code-generation)  
 
-__3.&ensp;[K-Language Design](#k-language-design)__  
+__3.&ensp;[K-Language Design](#3-k-language-design)__  
 
-__4.&ensp;[K-Language Specification](#k-language-specification)__  
-&ensp;&ensp; 4.1&ensp;[Reserved Words](#reserved-words)  
-&ensp;&ensp; 4.2&ensp;[Types](#types)  
-&ensp;&ensp; 4.3&ensp;[Operators](#operators)  
-&ensp;&ensp; 4.4&ensp;[Control Structures](#control-structures)  
-&ensp;&ensp; 4.5&ensp;[Functions](#functions)  
-&ensp;&ensp; 4.6&ensp;[Object Types](#object-types)  
+__4.&ensp;[K-Language Specification](#4-k-language-specification)__  
+&ensp;&ensp; 4.1&ensp;[Reserved Words](#4-1-reserved-words)  
+&ensp;&ensp; 4.2&ensp;[Types](#4-2-types)  
+&ensp;&ensp; 4.3&ensp;[Operators](#4-3-operators)  
+&ensp;&ensp; 4.4&ensp;[Control Structures](#4-4-control-structures)  
+&ensp;&ensp; 4.5&ensp;[Functions](#4-5-functions)  
+&ensp;&ensp; 4.6&ensp;[Object Types](#4-6-object-types)  
 
-__5.&ensp;[The K-Compiler](#the-k-compiler)__
+__5.&ensp;[The K-Compiler](#5-the-k-compiler)__
 
 ---
 
-## Preamble
+## 1. Preamble
 [...]
 
-### About Me
+### 1.1 About Me
 [...]
 
-### Motivation
-[...]
-
-
-## Introduction to Compilers
-[...]
-
-### Tokenization
-[...]
-
-### Lexical Scanner
-[...]
-
-### Gramma
-[...]
-
-### Parser
-[...]
-
-### Abstract Syntax Trees
-[...]
-
-### Semantic Analysis
-[...]
-
-### Intermediate Representation
-[...]
-
-### Static Analysis and Optimization
-[...]
-
-### Code Generation
+### 1.2 Motivation
 [...]
 
 
-## K-Language Design
+## 2. Introduction to Compilers
 [...]
 
-## K-Language Specification
+### 2.1 Tokenization
 [...]
 
-### Reserved Words
+### 2.2 Lexical Scanner
 [...]
 
-### Types
+### 2.3 Gramma
 [...]
 
-### Operators
+### 2.4 Parser
 [...]
 
-### Control Structures
+### 2.5 Abstract Syntax Trees
 [...]
 
-### Functions
+### 2.6 Semantic Analysis
 [...]
 
-### Object Types
+### 2.7 Intermediate Representation
+[...]
+
+### 2.8 Static Analysis and Optimization
+[...]
+
+### 2.9 Code Generation
 [...]
 
 
-## The K-Compiler
+## 3. K-Language Design
+[...]
+
+## 4. K-Language Specification
+[...]
+
+### 4.1 Reserved Words
+[...]
+
+### 4.2 Types
+[...]
+
+### 4.3 Operators
+[...]
+
+### 4.4 Control Structures
+[...]
+
+### 4.5 Functions
+[...]
+
+### 4.6 Object Types
+[...]
+
+
+## 5. The K-Compiler
 [...]
