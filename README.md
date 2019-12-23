@@ -32,7 +32,7 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler-ˆ)__
 
 ---
 
-## 1.&nbsp; Preamble [&#710;](#table-of-contents)
+## 1&nbsp; Preamble [&#710;](#table-of-contents)
 [...]
 
 ### 1.1&nbsp; About Me [&#710;](#table-of-contents)
@@ -41,7 +41,7 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler-ˆ)__
 ### 1.2&nbsp; Motivation [&#710;](#table-of-contents)
 [...]
 
-## 2.&nbsp; Introduction to Compilers [&#710;](#table-of-contents)
+## 2&nbsp; Introduction to Compilers [&#710;](#table-of-contents)
 [...]
 
 ### 2.1&nbsp; Tokenization [&#710;](#table-of-contents)
@@ -72,10 +72,10 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler-ˆ)__
 [...]
 
 
-## 3.&nbsp; K-Language Design [&#710;](#table-of-contents)
+## 3&nbsp; K-Language Design [&#710;](#table-of-contents)
 [...]
 
-## 4.&nbsp; K-Language Specification [&#710;](#table-of-contents)
+## 4&nbsp; K-Language Specification [&#710;](#table-of-contents)
 [...]
 
 ### 4.1&nbsp; Reserved Words [&#710;](#table-of-contents)
@@ -97,5 +97,5 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler-ˆ)__
 [...]
 
 
-## 5.&nbsp; The K-Compiler [&#710;](#table-of-contents)
+## 5&nbsp; The K-Compiler [&#710;](#table-of-contents)
 [...]
