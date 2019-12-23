@@ -21,8 +21,8 @@ __2.&ensp;[Introduction to Compilers](#introduction-to-compilers)__
 __3.&ensp;[K-Language Design](#k-language-design)__  
 
 __4.&ensp;[K-Language Specification](#k-language-specification)__  
-&ensp;&ensp;4.1&ensp;[Reserved Words](#reserved-words)  
-&ensp;&ensp;4.2&ensp;[Types](#types)  
+&nbsp;&ensp;&ensp;4.1&ensp;[Reserved Words](#reserved-words)  
+&emsp;&ensp;4.2&ensp;[Types](#types)  
 &ensp;&ensp;4.3&ensp;[Operators](#operators)  
 &ensp;&ensp;4.4&ensp;[Control Structures](#control-structures)  
 &ensp;&ensp;4.5&ensp;[Functions](#functions)  
