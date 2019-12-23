@@ -19,6 +19,10 @@ __2&nbsp;&nbsp; [Introduction to Compilers](#2-introduction-to-compilers-ˆ)__
 &ensp;&ensp; 2.9&nbsp;&nbsp; [Code Generation](#29-code-generation-ˆ)  
 
 __3&nbsp;&nbsp; [K-Language Design](#3-k-language-design-ˆ)__  
+&ensp;&ensp; 3.1&nbsp;&nbsp; [Vision](#31-vision-ˆ)  
+&ensp;&ensp; 3.2&nbsp;&nbsp; [Scope](#32-scope-ˆ)  
+&ensp;&ensp; 3.3&nbsp;&nbsp; [Paradigms](#33-paradigms-ˆ)  
+&ensp;&ensp; 3.4&nbsp;&nbsp; [Typing Discipline](#34-typing-discipline-ˆ)  
 
 __4&nbsp;&nbsp; [K-Language Specification](#4-k-language-specification-ˆ)__  
 &ensp;&ensp; 4.1&nbsp;&nbsp; [Reserved Words](#41-reserved-words-ˆ)  
