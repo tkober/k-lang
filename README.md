@@ -75,6 +75,19 @@ __5&nbsp;&nbsp; [The K-Compiler](#5-the-k-compiler-ˆ)__
 ## 3&nbsp;&nbsp; K-Language Design [&#710;](#table-of-contents)
 [...]
 
+### 3.1&nbsp;&nbsp; Vision [&#710;](#table-of-contents)
+[...]
+
+### 3.2&nbsp;&nbsp; Scope [&#710;](#table-of-contents)
+[...]
+
+### 3.3&nbsp;&nbsp; Paradigms [&#710;](#table-of-contents)
+[...]
+
+### 3.4&nbsp;&nbsp; Typing Discipline [&#710;](#table-of-contents)
+[...]
+
+
 ## 4&nbsp;&nbsp; K-Language Specification [&#710;](#table-of-contents)
 [...]
 
