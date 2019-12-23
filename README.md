@@ -1,1 +1,1 @@
-# k-lang
+# The K-Language Project
