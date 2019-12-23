@@ -35,67 +35,67 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler-ˆ)__
 ## 1.&nbsp; Preamble [&#710;](#table-of-contents)
 [...]
 
-### 1.1&nbsp; About Me [ˆ](#table-of-contents)
+### 1.1&nbsp; About Me [&#710;](#table-of-contents)
 [...]
 
-### 1.2&nbsp; Motivation [ˆ](#table-of-contents)
+### 1.2&nbsp; Motivation [&#710;](#table-of-contents)
 [...]
 
-## 2.&nbsp; Introduction to Compilers [ˆ](#table-of-contents)
+## 2.&nbsp; Introduction to Compilers [&#710;](#table-of-contents)
 [...]
 
-### 2.1&nbsp; Tokenization [ˆ](#table-of-contents)
+### 2.1&nbsp; Tokenization [&#710;](#table-of-contents)
 [...]
 
-### 2.2&nbsp; Lexical Scanner [ˆ](#table-of-contents)
+### 2.2&nbsp; Lexical Scanner [&#710;](#table-of-contents)
 [...]
 
-### 2.3&nbsp; Gramma [ˆ](#table-of-contents)
+### 2.3&nbsp; Gramma [&#710;](#table-of-contents)
 [...]
 
-### 2.4&nbsp; Parser [ˆ](#table-of-contents)
+### 2.4&nbsp; Parser [&#710;](#table-of-contents)
 [...]
 
-### 2.5&nbsp; Abstract Syntax Trees [ˆ](#table-of-contents)
+### 2.5&nbsp; Abstract Syntax Trees [&#710;](#table-of-contents)
 [...]
 
-### 2.6&nbsp; Semantic Analysis [ˆ](#table-of-contents)
+### 2.6&nbsp; Semantic Analysis [&#710;](#table-of-contents)
 [...]
 
-### 2.7&nbsp; Intermediate Representation [ˆ](#table-of-contents)
+### 2.7&nbsp; Intermediate Representation [&#710;](#table-of-contents)
 [...]
 
-### 2.8&nbsp; Static Analysis and Optimization [ˆ](#table-of-contents)
+### 2.8&nbsp; Static Analysis and Optimization [&#710;](#table-of-contents)
 [...]
 
-### 2.9&nbsp; Code Generation [ˆ](#table-of-contents)
-[...]
-
-
-## 3.&nbsp; K-Language Design [ˆ](#table-of-contents)
-[...]
-
-## 4.&nbsp; K-Language Specification [ˆ](#table-of-contents)
-[...]
-
-### 4.1&nbsp; Reserved Words [ˆ](#table-of-contents)
-[...]
-
-### 4.2&nbsp; Types [ˆ](#table-of-contents)
-[...]
-
-### 4.3&nbsp; Operators [ˆ](#table-of-contents)
-[...]
-
-### 4.4&nbsp; Control Structures [ˆ](#table-of-contents)
-[...]
-
-### 4.5&nbsp; Functions [ˆ](#table-of-contents)
-[...]
-
-### 4.6&nbsp; Object Types [ˆ](#table-of-contents)
+### 2.9&nbsp; Code Generation [&#710;](#table-of-contents)
 [...]
 
 
-## 5.&nbsp; The K-Compiler [ˆ](#table-of-contents)
+## 3.&nbsp; K-Language Design [&#710;](#table-of-contents)
+[...]
+
+## 4.&nbsp; K-Language Specification [&#710;](#table-of-contents)
+[...]
+
+### 4.1&nbsp; Reserved Words [&#710;](#table-of-contents)
+[...]
+
+### 4.2&nbsp; Types [&#710;](#table-of-contents)
+[...]
+
+### 4.3&nbsp; Operators [&#710;](#table-of-contents)
+[...]
+
+### 4.4&nbsp; Control Structures [&#710;](#table-of-contents)
+[...]
+
+### 4.5&nbsp; Functions [&#710;](#table-of-contents)
+[...]
+
+### 4.6&nbsp; Object Types [&#710;](#table-of-contents)
+[...]
+
+
+## 5.&nbsp; The K-Compiler [&#710;](#table-of-contents)
 [...]
