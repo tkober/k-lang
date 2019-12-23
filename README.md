@@ -7,7 +7,7 @@ __1.&nbsp; [Preamble](#1-preamble)__
 &ensp;&ensp; 1.1&ensp;[About Me](#11-about-me)  
 &ensp;&ensp; 1.2&ensp;[Motivation](#12-motivation)  
 
-__2.&ensp;[Introduction to Compilers](#2-introduction-to-compilers)__  
+__2.&nbsp; [Introduction to Compilers](#2-introduction-to-compilers)__  
 &ensp;&ensp; 2.1&ensp;[Tokenization](#21-tokenization)  
 &ensp;&ensp; 2.2&ensp;[Lexical Scanner](#22-lexical-scanner)  
 &ensp;&ensp; 2.3&ensp;[Gramma](#23-gramma)  
