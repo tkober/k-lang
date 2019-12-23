@@ -20,7 +20,7 @@ __2.&nbsp; [Introduction to Compilers](#2-introduction-to-compilers)__
 
 __3.&ensp;[K-Language Design](#3-k-language-design)__  
 
-__4.&ensp;[K-Language Specification](#4-k-language-specification)__  
+__4.&nbsp; [K-Language Specification](#4-k-language-specification)__  
 &ensp;&ensp; 4.1&ensp;[Reserved Words](#41-reserved-words)  
 &ensp;&ensp; 4.2&ensp;[Types](#42-types)  
 &ensp;&ensp; 4.3&ensp;[Operators](#43-operators)  
