@@ -5,7 +5,7 @@
 
 __1.&ensp;[Preamble](#preamble)__  
 &emsp;&ensp;1.1&ensp;[About Me](#about-me)  
-&ensp;&ensp;1.2&ensp;[Motivation](#motivation)  
+&emsp;&ensp;1.2&ensp;[Motivation](#motivation)  
 
 __2.&ensp;[Introduction to Compilers](#introduction-to-compilers)__  
 &ensp;&ensp;2.1&ensp;[Tokenization](#tokenization)  
