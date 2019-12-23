@@ -33,49 +33,70 @@ __5.&ensp;[The K-Compiler](#the-k-compiler)__
 ---
 
 ## Preamble
+[...]
 
 ### About Me
+[...]
 
 ### Motivation
+[...]
 
 
 ## Introduction to Compilers
+[...]
 
 ### Tokenization
+[...]
 
 ### Lexical Scanner
+[...]
 
 ### Gramma
+[...]
 
 ### Parser
+[...]
 
 ### Abstract Syntax Trees
+[...]
 
 ### Semantic Analysis
+[...]
 
 ### Intermediate Representation
+[...]
 
 ### Static Analysis and Optimization
+[...]
 
 ### Code Generation
+[...]
 
 
 ## K-Language Design
-
+[...]
 
 ## K-Language Specification
+[...]
 
 ### Reserved Words
+[...]
 
 ### Types
+[...]
 
 ### Operators
+[...]
 
 ### Control Structures
+[...]
 
 ### Functions
+[...]
 
 ### Object Types
+[...]
 
 
 ## The K-Compiler
+[...]
