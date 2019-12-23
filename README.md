@@ -8,7 +8,7 @@ __1&nbsp;&nbsp; [Preamble](#1-preamble-ˆ)__
 &ensp;&ensp;1.2&ensp;[Motivation](#12-motivation-ˆ)  
 
 __2&nbsp;&nbsp; [Introduction to Compilers](#2-introduction-to-compilers-ˆ)__  
-&emsp;&emsp;2.1&ensp;[Tokenization](#21-tokenization-ˆ)  
+&nbsp;&nbsp;&nbsp;&nbsp;2.1&ensp;[Tokenization](#21-tokenization-ˆ)  
 &ensp;&ensp;2.2&ensp;[Lexical Scanner](#22-lexical-scanner-ˆ)  
 &ensp;&ensp;2.3&ensp;[Gramma](#23-gramma-ˆ)  
 &ensp;&ensp;2.4&ensp;[Parser](#24-parser-ˆ)  
