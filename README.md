@@ -7,6 +7,15 @@ __1.&ensp;[Preamble](#preamble)__
 &ensp;&ensp;1.2&ensp;[Motivation](#motivation)  
 
 __2.&ensp;[Introduction to Compilers](#introduction-to-compilers)__  
+&ensp;&ensp;2.1&ensp;[Tokenization](#tokenization)  
+&ensp;&ensp;2.2&ensp;[Lexical Scanner](#lexical-scanner)  
+&ensp;&ensp;2.3&ensp;[Gramma](#gramma)  
+&ensp;&ensp;2.4&ensp;[Parser](#parser)  
+&ensp;&ensp;2.5&ensp;[Abstract Syntax Trees](#abstract-syntax-trees)  
+&ensp;&ensp;2.6&ensp;[Semantic Analysis](#semantic-analysis)  
+&ensp;&ensp;2.7&ensp;[Intermediate Representation](#intermediate-representation)  
+&ensp;&ensp;2.8&ensp;[Static Analysis and Optimization](#static-analysis-and-optimization)  
+&ensp;&ensp;2.9&ensp;[Code Generation](#code-generation)  
 
 __3.&ensp;[K-Language Design](#k-language-design)__  
 
@@ -29,6 +38,24 @@ __5.&ensp;[The K-Compiler](#the-k-compiler)__
 
 
 ## Introduction to Compilers
+
+### Tokenization
+
+### Lexical Scanner
+
+### Gramma
+
+### Parser
+
+### Abstract Syntax Trees
+
+### Semantic Analysis
+
+### Intermediate Representation
+
+### Static Analysis and Optimization
+
+### Code Generation
 
 
 ## K-Language Design
