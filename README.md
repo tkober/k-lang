@@ -1,5 +1,6 @@
 # The K-Language Project
 
+---
 ###### Table of Contents
 
 __1.&ensp;[Preamble](#preamble)__  
@@ -29,6 +30,7 @@ __4.&ensp;[K-Language Specification](#k-language-specification)__
 
 __5.&ensp;[The K-Compiler](#the-k-compiler)__
 
+---
 
 ## Preamble
 
