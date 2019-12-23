@@ -4,7 +4,7 @@
 ###### Table of Contents
 
 __1.&ensp;[Preamble](#preamble)__  
-&ensp;&ensp;1.1&ensp;[About Me](#about-me)  
+&emsp;&ensp;1.1&ensp;[About Me](#about-me)  
 &ensp;&ensp;1.2&ensp;[Motivation](#motivation)  
 
 __2.&ensp;[Introduction to Compilers](#introduction-to-compilers)__  
