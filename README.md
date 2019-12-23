@@ -32,7 +32,7 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler)__
 
 ---
 
-## 1.&nbsp; Preamble [⬆](#table-of-contents)
+## 1.&nbsp; Preamble [ˆ](#table-of-contents)
 [...]
 
 ### 1.1&nbsp; About Me
