@@ -32,18 +32,14 @@ __5.&ensp;[The K-Compiler](#5-the-k-compiler)__
 
 ---
 
-## 1.&nbsp; Preamble
+## 1.&nbsp; Preamble [U+25B2&](#table-of-contents)
 [...]
-[<div style="text-align: right">[toc]</div>](#table-of-contents)
 
 ### 1.1&nbsp; About Me
 [...]
 
 ### 1.2&nbsp; Motivation
 [...]
-<span class="right_align">
-This is my text with [a markdown link](/)
-</span>
 
 ## 2.&nbsp; Introduction to Compilers
 [...]
