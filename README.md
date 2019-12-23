@@ -4,29 +4,29 @@
 ###### Table of Contents
 
 __1.&ensp;[Preamble](#1-preamble)__  
-&ensp;&ensp; 1.1&ensp;[About Me](#1-1-about-me)  
-&ensp;&ensp; 1.2&ensp;[Motivation](#1-2-motivation)  
+&ensp;&ensp; 1.1&ensp;[About Me](#11-about-me)  
+&ensp;&ensp; 1.2&ensp;[Motivation](#12-motivation)  
 
 __2.&ensp;[Introduction to Compilers](#2-introduction-to-compilers)__  
-&ensp;&ensp; 2.1&ensp;[Tokenization](#2-1-tokenization)  
-&ensp;&ensp; 2.2&ensp;[Lexical Scanner](#2-2-lexical-scanner)  
-&ensp;&ensp; 2.3&ensp;[Gramma](#2-3-gramma)  
-&ensp;&ensp; 2.4&ensp;[Parser](#2-4-parser)  
-&ensp;&ensp; 2.5&ensp;[Abstract Syntax Trees](#2-5-abstract-syntax-trees)  
-&ensp;&ensp; 2.6&ensp;[Semantic Analysis](#2-6-semantic-analysis)  
-&ensp;&ensp; 2.7&ensp;[Intermediate Representation](#2-7-intermediate-representation)  
-&ensp;&ensp; 2.8&ensp;[Static Analysis and Optimization](#2-8-static-analysis-and-optimization)  
-&ensp;&ensp; 2.9&ensp; [Code Generation](#2-9-code-generation)  
+&ensp;&ensp; 2.1&ensp;[Tokenization](#21-tokenization)  
+&ensp;&ensp; 2.2&ensp;[Lexical Scanner](#22-lexical-scanner)  
+&ensp;&ensp; 2.3&ensp;[Gramma](#23-gramma)  
+&ensp;&ensp; 2.4&ensp;[Parser](#24-parser)  
+&ensp;&ensp; 2.5&ensp;[Abstract Syntax Trees](#25-abstract-syntax-trees)  
+&ensp;&ensp; 2.6&ensp;[Semantic Analysis](#26-semantic-analysis)  
+&ensp;&ensp; 2.7&ensp;[Intermediate Representation](#27-intermediate-representation)  
+&ensp;&ensp; 2.8&ensp;[Static Analysis and Optimization](#28-static-analysis-and-optimization)  
+&ensp;&ensp; 2.9&ensp; [Code Generation](#29-code-generation)  
 
 __3.&ensp;[K-Language Design](#3-k-language-design)__  
 
 __4.&ensp;[K-Language Specification](#4-k-language-specification)__  
-&ensp;&ensp; 4.1&ensp;[Reserved Words](#4-1-reserved-words)  
-&ensp;&ensp; 4.2&ensp;[Types](#4-2-types)  
-&ensp;&ensp; 4.3&ensp;[Operators](#4-3-operators)  
-&ensp;&ensp; 4.4&ensp;[Control Structures](#4-4-control-structures)  
-&ensp;&ensp; 4.5&ensp;[Functions](#4-5-functions)  
-&ensp;&ensp; 4.6&ensp;[Object Types](#4-6-object-types)  
+&ensp;&ensp; 4.1&ensp;[Reserved Words](#41-reserved-words)  
+&ensp;&ensp; 4.2&ensp;[Types](#42-types)  
+&ensp;&ensp; 4.3&ensp;[Operators](#43-operators)  
+&ensp;&ensp; 4.4&ensp;[Control Structures](#44-control-structures)  
+&ensp;&ensp; 4.5&ensp;[Functions](#45-functions)  
+&ensp;&ensp; 4.6&ensp;[Object Types](#46-object-types)  
 
 __5.&ensp;[The K-Compiler](#5-the-k-compiler)__
 
