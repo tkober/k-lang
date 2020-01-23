@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-flex --outfile=scanner/scanner.c scanner/scanner.flex
+flex --header-file=scanner/scanner.h --outfile=scanner/scanner.c scanner/scanner.flex

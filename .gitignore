@@ -34,3 +34,4 @@
 # C-Make
 cmake-build-debug
 compiler/scanner/scanner.c
+compiler/scanner/scanner.h
