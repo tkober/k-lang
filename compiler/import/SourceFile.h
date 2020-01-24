@@ -8,7 +8,10 @@
 
 #include <cstdio>
 #include <string>
+
+#ifndef FLEX_SCANNER
 #include "../scanner/scanner.h"
+#endif
 
 class SourceFile {
 
