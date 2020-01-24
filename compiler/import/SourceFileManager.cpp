@@ -4,7 +4,7 @@
 
 #include "SourceFileManager.h"
 
-SourceFileManager::SourceFileManager(int *pInt, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer) {
+SourceFileManager::SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer) {
     this->linenumber = linenumber;
     this->changeBuffer = changeBuffer;
     this->deleteBuffer = deleteBuffer;

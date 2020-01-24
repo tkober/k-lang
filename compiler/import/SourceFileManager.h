@@ -23,7 +23,7 @@ typedef void (*BufferStateOperation)(yy_buffer_state *);
 class SourceFileManager {
 
 public:
-    SourceFileManager(int *pInt, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer);
+    SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer);
 
     bool import(SourceFile *sourceFile);
     bool next();
