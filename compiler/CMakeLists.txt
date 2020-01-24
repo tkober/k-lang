@@ -3,4 +3,4 @@ project(compiler)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(compiler main.cpp meta/SourceFile.cpp meta/SourceFile.h)
+add_executable(compiler main.cpp import/SourceFile.cpp import/SourceFile.h)
