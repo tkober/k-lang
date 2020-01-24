@@ -18,15 +18,15 @@ SourceFile::SourceFile(const char *path) {
 
 }
 
-const std::string &SourceFile::getFilename() const {
+std::string &SourceFile::getFilename() {
     return filename;
 }
 
-void SourceFile::setFilename(const std::string &filename) {
+void SourceFile::setFilename(std::string &filename) {
     SourceFile::filename = filename;
 }
 
-FILE *SourceFile::getFile() const {
+FILE *SourceFile::getFile() {
     return file;
 }
 
@@ -34,7 +34,7 @@ void SourceFile::setFile(FILE *file) {
     SourceFile::file = file;
 }
 
-int SourceFile::getLineNumber() const {
+int SourceFile::getLineNumber() {
     return lineNumber;
 }
 
@@ -42,10 +42,10 @@ void SourceFile::setLineNumber(int lineNumber) {
     SourceFile::lineNumber = lineNumber;
 }
 
-const yy_buffer_state *SourceFile::getBufferState() const {
+yy_buffer_state *SourceFile::getBufferState() {
     return bufferState;
 }
 
-void SourceFile::setBufferState(const yy_buffer_state *bufferState) {
+void SourceFile::setBufferState(yy_buffer_state *bufferState) {
     SourceFile::bufferState = bufferState;
 }
