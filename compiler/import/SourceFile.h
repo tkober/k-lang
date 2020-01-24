@@ -18,6 +18,18 @@ class SourceFile {
 public:
     SourceFile(const char *path);
 
+    const std::string &getFilename() const;
+    void setFilename(const std::string &filename);
+
+    FILE *getFile() const;
+    void setFile(FILE *file);
+
+    int getLineNumber() const;
+    void setLineNumber(int lineNumber);
+
+    const yy_buffer_state *getBufferState() const;
+    void setBufferState(const yy_buffer_state *bufferState);
+
 private:
     std::string filename;
     FILE *file;
