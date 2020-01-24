@@ -3,4 +3,4 @@ project(compiler)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(compiler main.cpp import/SourceFile.cpp import/SourceFile.h scanner/scanner.h scanner/scanner.cpp)
+add_executable(compiler main.cpp import/SourceFile.cpp import/SourceFile.h scanner/scanner.h scanner/scanner.cpp import/SourceFileManager.cpp import/SourceFileManager.h)
