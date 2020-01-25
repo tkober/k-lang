@@ -15,12 +15,12 @@ extern void printLine();
 
 %%
 
-^[ \t]*import[ \t]*[\"<]    {
+^[ \t]*import[ \t]*[\"]     {
                                 printLine();
                                 BEGIN IMPORT;
                             }
 
-<IMPORT>[^ \t\n\">]+        {
+<IMPORT>[^ \t\n\"]+         {
                                 printf("%s\n", yytext);
                                 {
                                     int c;
