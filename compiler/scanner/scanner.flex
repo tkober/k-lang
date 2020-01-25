@@ -9,39 +9,50 @@
 #include "../import/SourceFileManager.h"
 
 extern SourceFileManager *sourceFileManager;
+extern void printLine();
 
 %}
 
 %%
 
-^[ \t]*import[ \t]*[\"<]    { BEGIN IMPORT; }
+^[ \t]*import[ \t]*[\"<]    {
+                                printLine();
+                                BEGIN IMPORT;
+                            }
 
 <IMPORT>[^ \t\n\">]+        {
+                                printf("%s\n", yytext);
                                 {
                                     int c;
                                     while ((c = yyinput()) && c != '\n') ;
                                 }
 
-                                yylineno++;
                                 SourceFile *sourceFile = new SourceFile(yytext);
-                                if (!sourceFileManager->import(sourceFile)) {
-                                    printf("<WARN> File '%s' is already included\n", yytext);
-                                }
+                                if (!sourceFileManager->import(sourceFile)) {}
+
                                 BEGIN INITIAL;
                             }
 
-<IMPORT>.|\n                { fprintf(stderr, "%4d bad include line\n", yylineno); yyterminate(); }
+<IMPORT>.|\n                {
+                                fprintf(stderr, "%4d bad include line\n", yylineno);
+                                yyterminate();
+                            }
 
 <<EOF>>                     {
                                 if (!sourceFileManager->next()) {
                                     yyterminate();
                                 }
+                                printf("\n");
                             }
 
-^.                          { fprintf(yyout, "%4d %s", yylineno, yytext); }
-^\n                         { fprintf(yyout, "\n"); yylineno++; }
-\n                          { ECHO; yylineno++;}
+^.                          { printLine(); }
+^\n                         { printLine(); }
+\n                          { ECHO; }
 .                           { ECHO; }
 
 %%
 
+
+void printLine() {
+    fprintf(yyout, "%s::%d\t%s", sourceFileManager->getCurrentFileName(), yylineno, yytext);
+}

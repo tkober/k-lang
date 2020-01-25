@@ -55,6 +55,17 @@ bool SourceFileManager::next() {
     return true;
 }
 
+char * SourceFileManager::getCurrentFileName() {
+    if (this->sourceFiles.empty()) {
+        return NULL;
+    } else {
+        const std::string filename = this->sourceFiles.top()->getFilename();
+        char *result = (char *)malloc(sizeof(char) * filename.size());
+        strcpy(result, filename.c_str());
+        return result;
+    }
+}
+
 void SourceFileManager::changeSourceFile(SourceFile *sourceFile) {
     this->changeBuffer(sourceFile->getBufferState());
     *linenumber = sourceFile->getLineNumber();

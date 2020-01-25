@@ -1,0 +1,5 @@
+import "/Users/kober/code/k-lang/compiler/file_a"
+
+b_line 3
+b_line 4
+b_line 5

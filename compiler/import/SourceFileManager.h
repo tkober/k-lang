@@ -27,6 +27,7 @@ public:
 
     bool import(SourceFile *sourceFile);
     bool next();
+    char *getCurrentFileName();
 
 private:
     int *linenumber;
