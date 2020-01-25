@@ -1,4 +1,4 @@
-import "/Users/kober/code/k-lang/compiler/file_a"
+@import "/Users/kober/code/k-lang/compiler/file_a"
 
 b_line 3
 b_line 4

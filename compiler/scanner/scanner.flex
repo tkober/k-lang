@@ -15,7 +15,7 @@ extern void printLine();
 
 %%
 
-^[ \t]*import[ \t]*[\"]     {
+^[ \t]*@import[ \t]*[\"]     {
                                 printLine();
                                 BEGIN IMPORT;
                             }
