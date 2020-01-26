@@ -6,6 +6,7 @@
 %x IMPORT
 
 %{
+#include <iostream>
 #include <string.h>
 
 #include "../import/SourceFile.h"
@@ -30,6 +31,7 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
                                         char *name = (char *)malloc(sizeof(char) * n);
                                         strncpy(name, yytext, n);
                                         printf("defined namespace: '%s'", name);
+                                        sourceFileManager->getCurrentSourceFile()->setNameSpace(name);
                                         BEGIN INITIAL;
                                     }
 <NAMESPACE>.|\n                     {
@@ -67,7 +69,7 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
 
 
 void printLine() {
-    fprintf(yyout, "%s::%d\t%s", sourceFileManager->getCurrentFileName(), yylineno, yytext);
+    std::cout << sourceFileManager->getCurrentSourceFile()->getNameSpace() << "::" << yylineno << "\t" << yytext;
 }
 
 

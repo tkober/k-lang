@@ -15,7 +15,20 @@ SourceFile::SourceFile(const char *path) {
     this->bufferState = bufferState;
     this->filename = path;
     this->lineNumber = 1;
+    this->nameSpace = "\"" + this->filename + "\"";
+}
 
+std::string &SourceFile::getNameSpace() {
+    return nameSpace;
+}
+
+void SourceFile::setNameSpace(std::string &nameSpace) {
+    SourceFile::nameSpace = nameSpace;
+}
+
+void SourceFile::setNameSpace(char *nameSpace) {
+    std::string name = nameSpace;
+    SourceFile::setNameSpace(name);
 }
 
 std::string &SourceFile::getFilename() {

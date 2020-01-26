@@ -34,7 +34,7 @@ public:
 
     bool import(SourceFile *sourceFile);
     bool next();
-    char *getCurrentFileName();
+    SourceFile *getCurrentSourceFile();
 
 private:
     int *linenumber;

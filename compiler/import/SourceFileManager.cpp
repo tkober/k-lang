@@ -67,14 +67,11 @@ bool SourceFileManager::next() {
     return true;
 }
 
-char * SourceFileManager::getCurrentFileName() {
+SourceFile *SourceFileManager::getCurrentSourceFile() {
     if (this->sourceFiles.empty()) {
         return NULL;
     } else {
-        const std::string filename = this->sourceFiles.top()->getFilename();
-        char *result = (char *)malloc(sizeof(char) * filename.size());
-        strcpy(result, filename.c_str());
-        return result;
+        return this->sourceFiles.top();
     }
 }
 

@@ -18,6 +18,10 @@ class SourceFile {
 public:
     SourceFile(const char *path);
 
+    std::string &getNameSpace();
+    void setNameSpace(std::string &nameSpace);
+    void setNameSpace(char *nameSpace);
+
     std::string &getFilename();
     void setFilename(std::string &filename);
 
@@ -32,6 +36,7 @@ public:
 
 private:
     std::string filename;
+    std::string nameSpace;
     FILE *file;
     int lineNumber;
     YY_BUFFER_STATE bufferState;
