@@ -4,10 +4,11 @@
 
 #include "SourceFileManager.h"
 
-SourceFileManager::SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer) {
+SourceFileManager::SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer, StateActivation stateActivation) {
     this->linenumber = linenumber;
     this->changeBuffer = changeBuffer;
     this->deleteBuffer = deleteBuffer;
+    this->stateActivation = stateActivation;
 }
 
 bool SourceFileManager::import(SourceFile *sourceFile) {
@@ -27,6 +28,7 @@ bool SourceFileManager::import(SourceFile *sourceFile) {
 
     // Change the actual source file of the scanner
     this->changeSourceFile(sourceFile);
+    this->stateActivation();
 
     return true;
 }

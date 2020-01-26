@@ -2,6 +2,7 @@
 %option yylineno
 
 %x IMPORT
+%x NEW_FILE
 
 %{
 
@@ -14,6 +15,9 @@ extern void printLine();
 %}
 
 %%
+
+<NEW_FILE>.                  { printf("bla"); yyterminate(); }
+
 
 ^[ \t]*@import[ \t]*[\"]     {
                                 printLine();
@@ -55,4 +59,9 @@ extern void printLine();
 
 void printLine() {
     fprintf(yyout, "%s::%d\t%s", sourceFileManager->getCurrentFileName(), yylineno, yytext);
+}
+
+
+void activateNewFileState() {
+    BEGIN NEW_FILE;
 }

@@ -19,11 +19,12 @@ enum SourceFileState {
 };
 
 typedef void (*BufferStateOperation)(yy_buffer_state *);
+typedef void (*StateActivation)();
 
 class SourceFileManager {
 
 public:
-    SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer);
+    SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer, StateActivation stateActivation);
 
     bool import(SourceFile *sourceFile);
     bool next();
@@ -33,6 +34,7 @@ private:
     int *linenumber;
     BufferStateOperation changeBuffer;
     BufferStateOperation deleteBuffer;
+    StateActivation stateActivation;
 
     std::map<std::string, SourceFileState> sourceFileStates;
     std::stack<SourceFile *> sourceFiles;
