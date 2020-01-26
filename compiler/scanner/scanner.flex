@@ -39,13 +39,12 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
 
 
 ^[ \t]*import[ \t]*[\"]     {   BEGIN IMPORT; }
-<IMPORT>[^ \t\n\"]+         {
-                                {
-                                    int c;
-                                    while ((c = yyinput()) && c != '\n') ;
-                                }
+<IMPORT>[^ \t\n\"]+\"       {
+                                int n = yyleng-1;
+                                char *name = (char *)malloc(sizeof(char) * n);
+                                strncpy(name, yytext, n);
 
-                                SourceFile *sourceFile = new SourceFile(yytext);
+                                SourceFile *sourceFile = new SourceFile(name);
                                 if (!sourceFileManager->import(sourceFile)) {}
                             }
 <IMPORT>.|\n                {
@@ -58,7 +57,6 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
                                 if (!sourceFileManager->next()) {
                                     yyterminate();
                                 }
-                                printf("\n");
                             }
 ^.                          {   printLine(); }
 ^\n                         {   printLine(); }
