@@ -1,4 +1,5 @@
-@import "/Users/kober/code/k-lang/compiler/file_a"
+namespace de.kober.b;
+import "/Users/kober/code/k-lang/compiler/file_a"
 
 b_line 3
 b_line 4

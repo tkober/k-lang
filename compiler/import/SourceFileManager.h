@@ -24,7 +24,13 @@ typedef void (*StateActivation)();
 class SourceFileManager {
 
 public:
-    SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer, StateActivation stateActivation);
+    SourceFileManager(
+            int *linenumber,
+            BufferStateOperation changeBuffer,
+            BufferStateOperation deleteBuffer,
+            StateActivation newFileState,
+            StateActivation initialState
+    );
 
     bool import(SourceFile *sourceFile);
     bool next();
@@ -34,7 +40,8 @@ private:
     int *linenumber;
     BufferStateOperation changeBuffer;
     BufferStateOperation deleteBuffer;
-    StateActivation stateActivation;
+    StateActivation newFileState;
+    StateActivation initialState;
 
     std::map<std::string, SourceFileState> sourceFileStates;
     std::stack<SourceFile *> sourceFiles;

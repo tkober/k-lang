@@ -4,16 +4,25 @@
 
 #include "SourceFileManager.h"
 
-SourceFileManager::SourceFileManager(int *linenumber, BufferStateOperation changeBuffer, BufferStateOperation deleteBuffer, StateActivation stateActivation) {
+SourceFileManager::SourceFileManager(
+        int *linenumber,
+        BufferStateOperation changeBuffer,
+        BufferStateOperation deleteBuffer,
+        StateActivation newFileState,
+        StateActivation initialState) {
+
     this->linenumber = linenumber;
     this->changeBuffer = changeBuffer;
     this->deleteBuffer = deleteBuffer;
-    this->stateActivation = stateActivation;
+    this->newFileState = newFileState;
+    this->initialState = initialState;
+
 }
 
 bool SourceFileManager::import(SourceFile *sourceFile) {
     // Already parsed or is already on the stack?
     if (this->sourceFileStates.find(sourceFile->getFilename()) != this->sourceFileStates.end()) {
+        this->initialState();
         return false;
     }
 
@@ -28,7 +37,7 @@ bool SourceFileManager::import(SourceFile *sourceFile) {
 
     // Change the actual source file of the scanner
     this->changeSourceFile(sourceFile);
-    this->stateActivation();
+    this->newFileState();
 
     return true;
 }
@@ -53,6 +62,7 @@ bool SourceFileManager::next() {
     // Change the actual source file of the scanner
     SourceFile *nextSourceFile = this->sourceFiles.top();
     this->changeSourceFile(nextSourceFile);
+    this->initialState();
 
     return true;
 }
