@@ -20,9 +20,9 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
 
 %%
 
-<NEW_FILE>^[ \t]*namespace[ \t]+    { BEGIN NAMESPACE; }
+<NEW_FILE>^[ \t]*namespace[ \t]+    {   BEGIN NAMESPACE; }
 <NEW_FILE>^\n                       {}
-<NEW_FILE>^.                        { unput(*yytext); yy_set_bol(1); BEGIN INITIAL; }
+<NEW_FILE>^.                        {   unput(*yytext); yy_set_bol(1); BEGIN INITIAL; }
 
 
 <NAMESPACE>{NAMESPACE};             {
@@ -38,13 +38,8 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
                                     }
 
 
-^[ \t]*import[ \t]*[\"]     {
-                                printLine();
-                                BEGIN IMPORT;
-                            }
-
+^[ \t]*import[ \t]*[\"]     {   BEGIN IMPORT; }
 <IMPORT>[^ \t\n\"]+         {
-                                printf("%s\n", yytext);
                                 {
                                     int c;
                                     while ((c = yyinput()) && c != '\n') ;
@@ -53,12 +48,11 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
                                 SourceFile *sourceFile = new SourceFile(yytext);
                                 if (!sourceFileManager->import(sourceFile)) {}
                             }
-
 <IMPORT>.|\n                {
-                                printLine();
                                 fprintf(stderr, "%4d bad include line\n", yylineno);
                                 yyterminate();
                             }
+
 
 <<EOF>>                     {
                                 if (!sourceFileManager->next()) {
@@ -66,11 +60,10 @@ NAMESPACE ([a-zA-Z]+(\.[a-zA-Z]+)*)
                                 }
                                 printf("\n");
                             }
-
-^.                          { printLine(); }
-^\n                         { printLine(); }
-\n                          { ECHO; }
-.                           { ECHO; }
+^.                          {   printLine(); }
+^\n                         {   printLine(); }
+\n                          {   ECHO; }
+.                           {   ECHO; }
 
 %%
 
