@@ -16,7 +16,9 @@ extern void printLine();
 
 %%
 
-<NEW_FILE>.                  { printf("bla"); yyterminate(); }
+
+<NEW_FILE>^\n                   {}
+<NEW_FILE>^.                    { unput(*yytext); yy_set_bol(1); BEGIN INITIAL; }
 
 
 ^[ \t]*@import[ \t]*[\"]     {
