@@ -140,6 +140,24 @@ public:
     FunctionAst(std::unique_ptr<PrototypeAst> prototype, std::unique_ptr<ExpressionAst> body) : prototype(std::move(prototype)), body(std::move(body)) {}
 };
 
+/// currentToken / getNextToken - Provide a simple token buffer. currentToken  is the current token the parser is
+/// looking at. getNextToken reads another token from the lexer and updates currentToken with its result.
+static int currentToken;
+
+static int getNextToken() {
+    return currentToken = getToken();
+}
+
+/// logError* - Helper functions for error handling
+std::unique_ptr<ExpressionAst> logError(const char *str) {
+    fprintf(stderr, "Error: %s\n", str);
+    return nullptr;
+}
+
+std::unique_ptr<PrototypeAst> logErrorP(const char *str) {
+    logError(str);
+    return nullptr;
+}
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
