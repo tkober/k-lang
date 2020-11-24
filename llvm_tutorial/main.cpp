@@ -160,14 +160,99 @@ static int getNextToken() {
 }
 
 /// logError* - Helper functions for error handling
-unique_ptr<ExpressionAst> logError(const char *str) {
+static unique_ptr<ExpressionAst> logError(const char *str) {
     fprintf(stderr, "Error: %s\n", str);
     return nullptr;
 }
 
-unique_ptr<PrototypeAst> logErrorP(const char *str) {
+static unique_ptr<PrototypeAst> logErrorP(const char *str) {
     logError(str);
     return nullptr;
+}
+
+/// numberExpression ::= number
+static unique_ptr<NumberExpressionAst> parseNumberExpression() {
+    auto result = make_unique<NumberExpressionAst>(numberValue);
+    getNextToken(); // consume the number
+    return move(result);
+}
+
+/// parenthesisExpression ::= '(' expression ')'
+extern unique_ptr<ExpressionAst> parseExpression();
+static unique_ptr<ExpressionAst> parseParenthesisExpression() {
+    getNextToken(); // consume '('
+    auto expression = parseExpression();
+
+    if (!expression) {
+        return nullptr;
+    }
+
+    if (currentToken != ')') {
+        return logError("expected ')'");
+    }
+    getNextToken(); // consume ')'
+
+    return expression;
+}
+
+/// identifierExpression
+///   ::= identifier
+///   ::= identifier '(' expression* ')'
+static unique_ptr<ExpressionAst> parseIdentifierExpression() {
+    string identifierName = identifierString;
+    getNextToken(); // consume the identifier
+
+    if (currentToken =! '(') {
+        // result -> simple variable reference
+        return make_unique<VariableExpressionAst>(identifierName);
+    }
+
+    // result -> call
+    getNextToken(); // consume '('
+    vector<unique_ptr<ExpressionAst>> arguments;
+    if (currentToken != ')')  {
+        while (1) {
+            if (auto argument = parseExpression()) {
+                arguments.push_back(move(argument));
+            } else {
+                return nullptr;
+            }
+
+            if (currentToken == ')') {
+                break;
+            }
+
+            if (currentToken != ',') {
+                return logError("Expected ')' or ',' in argument list");
+            }
+
+            getNextToken();
+        }
+    }
+
+    getNextToken(); // consume ')'
+
+    return make_unique<CallExpressionAst>(identifierName, move(arguments));
+}
+
+/// primary
+///   ::= identifierExpression
+///   ::= numberExpression
+///   ::= parenthesisExpression
+static unique_ptr<ExpressionAst> parsePrimary() {
+    switch (currentToken) {
+        case token_identifier:
+            return parseIdentifierExpression();
+
+        case token_number:
+            return parseNumberExpression();
+
+        case '(':
+            return parseParenthesisExpression();
+
+        default:
+            return logError("unknown token when expecting an expression");
+    }
 }
 
 int main() {
