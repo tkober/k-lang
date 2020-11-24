@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
 enum Token {
     token_eof = -1,
 
@@ -13,8 +15,8 @@ enum Token {
     token_number = -5
 };
 
-static std::string identifierString;    // Used if token_identifier
-static double numberValue;              // Used if token_identifier
+static string identifierString;    // Used if token_identifier
+static double numberValue;         // Used if token_identifier
 
 /// getToken - Returns the next token from the standard input.
 static int getToken() {
@@ -45,7 +47,7 @@ static int getToken() {
 
         // [0-9.]+
         if (isdigit(lastCharacter) || lastCharacter == '.') {
-            std::string numberString;
+            string numberString;
 
             do {
                 numberString += lastCharacter;
@@ -95,49 +97,58 @@ public:
 
 /// VariableExpressionAst - Expression class for referencing a variable like "foo".
 class VariableExpressionAst : public ExpressionAst {
-    std::string name;
+    string name;
 
 public:
-    VariableExpressionAst(const std::string &name) : name(name) {}
+    VariableExpressionAst(const string &name) : name(name) {}
 };
 
 /// BinaryExpressionAst - Expression class for a binary operator.
 class BinaryExpressionAst : public ExpressionAst {
     char op;
-    std::unique_ptr<ExpressionAst> lhs, rhs;
+    unique_ptr<ExpressionAst> lhs, rhs;
 
 public:
-    BinaryExpressionAst(char op, std::unique_ptr<ExpressionAst> lhs, std::unique_ptr<ExpressionAst> rhs) : op(op), lhs(std::move(lhs)), rhs(std::move(rhs)) {}
+    BinaryExpressionAst(char op, unique_ptr<ExpressionAst> lhs, unique_ptr<ExpressionAst> rhs)
+            : op(op),
+              lhs(move(lhs)),
+              rhs(move(rhs)) {}
 };
 
 // CallExpressionAst - Expression class for function calls.
 class CallExpressionAst : public ExpressionAst {
-    std::string callee;
-    std::vector<std::unique_ptr<ExpressionAst>> arguments;
+    string callee;
+    vector<unique_ptr<ExpressionAst>> arguments;
 
 public:
-    CallExpressionAst(const std::string &callee, std::vector<std::unique_ptr<ExpressionAst>> arguments) : callee(callee), arguments(std::move(arguments)) {}
+    CallExpressionAst(const string &callee, vector<unique_ptr<ExpressionAst>> arguments)
+            : callee(callee),
+              arguments(move(arguments)) {}
 };
 
 /// PrototypeAst - This class represents the "prototype" of a function,
 /// which captures its name and its argument names (thus implicitly the number of arguments) it takes.
 class PrototypeAst {
-    std::string name;
-    std::vector<std::string> arguments;
+    string name;
+    vector<string> arguments;
 
 public:
-    PrototypeAst(const std::string &name, std::vector<std::string> arguments) : name(name), arguments(std::move(arguments)) {}
+    PrototypeAst(const string &name, vector<string> arguments)
+            : name(name),
+              arguments(move(arguments)) {}
 
-    const std::string &getName() const { return name; }
+    const string &getName() const { return name; }
 };
 
 /// FunctionAst - This class represents a function definition itself.
 class FunctionAst {
-    std::unique_ptr<PrototypeAst> prototype;
-    std::unique_ptr<ExpressionAst> body;
+    unique_ptr<PrototypeAst> prototype;
+    unique_ptr<ExpressionAst> body;
 
 public:
-    FunctionAst(std::unique_ptr<PrototypeAst> prototype, std::unique_ptr<ExpressionAst> body) : prototype(std::move(prototype)), body(std::move(body)) {}
+    FunctionAst(unique_ptr<PrototypeAst> prototype, unique_ptr<ExpressionAst> body)
+            : prototype(move(prototype)),
+              body(move(body)) {}
 };
 
 /// currentToken / getNextToken - Provide a simple token buffer. currentToken  is the current token the parser is
@@ -149,17 +160,17 @@ static int getNextToken() {
 }
 
 /// logError* - Helper functions for error handling
-std::unique_ptr<ExpressionAst> logError(const char *str) {
+unique_ptr<ExpressionAst> logError(const char *str) {
     fprintf(stderr, "Error: %s\n", str);
     return nullptr;
 }
 
-std::unique_ptr<PrototypeAst> logErrorP(const char *str) {
+unique_ptr<PrototypeAst> logErrorP(const char *str) {
     logError(str);
     return nullptr;
 }
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    cout << "Hello, World!" << endl;
     return 0;
 }
