@@ -35,7 +35,11 @@
 cmake-build-debug
 compiler/scanner/scanner.c
 compiler/scanner/scanner.h
+<<<<<<< Updated upstream
 compiler/scanner/scanner.cpp
 
 # IDEA
 .idea/
+=======
+compiler/scanner/scanner.cppcompiler/file_a
+>>>>>>> Stashed changes
