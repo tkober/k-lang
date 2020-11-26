@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 set(CMAKE_CXX_STANDARD 14)
 
 project(llvm_tutorial)
-add_executable(llvm_tutorial llvm_tutorial/main.cpp)
+add_executable(llvm_tutorial llvm_tutorial.cpp)
 
 
 project(compiler)
