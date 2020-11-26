@@ -38,4 +38,4 @@ compiler/scanner/scanner.h
 compiler/scanner/scanner.cpp
 
 # IDEA
-/llvm_tutorial/.idea/
+.idea/
