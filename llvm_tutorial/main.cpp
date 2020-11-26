@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -159,6 +160,21 @@ static int getNextToken() {
     return currentToken = getToken();
 }
 
+/// Binary Operator Precendence
+static map<char, int> binaryOperatorPrecendence;
+
+static int getTokenPrecendence() {
+    if (!isascii(currentToken)) {
+        return -1;
+    }
+
+    int tokenPrecendence = binaryOperatorPrecendence[currentToken];
+    if (tokenPrecendence <= 0) {
+        return -1;
+    }
+    return tokenPrecendence;
+}
+
 /// logError* - Helper functions for error handling
 static unique_ptr<ExpressionAst> logError(const char *str) {
     fprintf(stderr, "Error: %s\n", str);
@@ -170,6 +186,8 @@ static unique_ptr<PrototypeAst> logErrorP(const char *str) {
     return nullptr;
 }
 
+static unique_ptr<ExpressionAst> parseExpression();
+
 /// numberExpression ::= number
 static unique_ptr<NumberExpressionAst> parseNumberExpression() {
     auto result = make_unique<NumberExpressionAst>(numberValue);
@@ -178,7 +196,6 @@ static unique_ptr<NumberExpressionAst> parseNumberExpression() {
 }
 
 /// parenthesisExpression ::= '(' expression ')'
-extern unique_ptr<ExpressionAst> parseExpression();
 static unique_ptr<ExpressionAst> parseParenthesisExpression() {
     getNextToken(); // consume '('
     auto expression = parseExpression();
@@ -202,7 +219,7 @@ static unique_ptr<ExpressionAst> parseIdentifierExpression() {
     string identifierName = identifierString;
     getNextToken(); // consume the identifier
 
-    if (currentToken =! '(') {
+    if (currentToken = !'(') {
         // result -> simple variable reference
         return make_unique<VariableExpressionAst>(identifierName);
     }
@@ -210,7 +227,7 @@ static unique_ptr<ExpressionAst> parseIdentifierExpression() {
     // result -> call
     getNextToken(); // consume '('
     vector<unique_ptr<ExpressionAst>> arguments;
-    if (currentToken != ')')  {
+    if (currentToken != ')') {
         while (1) {
             if (auto argument = parseExpression()) {
                 arguments.push_back(move(argument));
@@ -255,7 +272,162 @@ static unique_ptr<ExpressionAst> parsePrimary() {
     }
 }
 
+/// binaryOperationRhs
+///   ::= ('+', primary)*
+static unique_ptr<ExpressionAst> parseBinaryOperationRhs(int expresseionPrecendence, unique_ptr<ExpressionAst> lhs) {
+    while (1) {
+        // Find operator precendence
+        int tokenPrecendence = getTokenPrecendence();
+
+        // If this is a binary operation that binds at least as tightly as the current one,
+        // consume it, otherwise we are done.
+        if (tokenPrecendence < expresseionPrecendence) {
+            return lhs;
+        }
+
+        // Okay, we know it is a binary operation
+        int binaryOperation = currentToken;
+
+        // Parse the primary expression after the binary operator
+        auto rhs = parsePrimary();
+        if (!rhs) {
+            return nullptr;
+        }
+
+        // If binary operation binds less tightly with RHS than the operator after RHS, let the pending operator take
+        // RHS as its LHS.
+        int nextPrecendence = getTokenPrecendence();
+        if (tokenPrecendence < nextPrecendence) {
+            rhs = parseBinaryOperationRhs(tokenPrecendence + 1, move(rhs));
+            if (!rhs) {
+                return nullptr;
+            }
+        }
+
+        // Merge LHS and RHS
+        lhs = make_unique<BinaryExpressionAst>(binaryOperation, move(lhs), move(rhs));
+    }
+}
+
+/// prototype
+///   ::= id '(' id* ')'
+static unique_ptr<PrototypeAst> parsePrototype() {
+    if (currentToken != token_identifier) {
+        return logErrorP("Expected function name in prototype");
+    }
+
+    string functionName = identifierString;
+    getNextToken();
+
+    if (currentToken != '(') {
+        return logErrorP("Expected '(' in prototype");
+    }
+
+    // Read arguments name list
+    vector<string> argumentNames;
+    while (getNextToken() == token_identifier) {
+        argumentNames.push_back(identifierString);
+    }
+
+    if (currentToken != ')') {
+        return logErrorP("Expected ')' in prototype");
+    }
+    getNextToken(); // consume ')'
+
+    return make_unique<PrototypeAst>(functionName, move(argumentNames));
+}
+
+/// definition
+///   ::= 'def' prototype expression
+static unique_ptr<FunctionAst> parseDefinition() {
+    getNextToken(); // consume def
+
+    auto prototype = parsePrototype();
+    if (!prototype) {
+        return nullptr;
+    }
+
+    if (auto expression = parseExpression()) {
+        return make_unique<FunctionAst>(move(prototype), move(expression));
+    }
+
+    return nullptr;
+}
+
+/// external
+///   ::= 'extern' prototype
+static unique_ptr<PrototypeAst> parseExternal() {
+    getNextToken(); // consume extern
+    return parsePrototype();
+}
+
+/// topLevelExpression
+///   ::= expression
+static unique_ptr<FunctionAst> parseTopLevelExpression() {
+    if (auto expression = parseExpression()) {
+        // Build an anonymous prototype
+        auto prototype = make_unique<PrototypeAst>("", vector<string>());
+        return make_unique<FunctionAst>(move(prototype), move(expression));
+    }
+
+    return nullptr;
+}
+
+/// expression
+//    ::= primary binarayOperationRhs
+static unique_ptr<ExpressionAst> parseExpression() {
+    auto lhs = parsePrimary();
+    if (!lhs) {
+        return nullptr;
+    }
+
+    return parseBinaryOperationRhs(0, move(lhs));
+}
+
+/// top
+///   ::= definition | external | expression | ';'
+static void mainLoop() {
+    while (1) {
+        fprintf(stderr, "ready> ");
+
+        switch (currentToken) {
+
+            case token_eof:
+                return;
+
+            case ';': // Ignore top level semicolons
+                getNextToken();
+                break;
+
+            case token_def:
+                parseDefinition();
+                break;
+
+            case token_extern:
+                parseExternal();
+                break;
+
+            default:
+                parseTopLevelExpression();
+                break;
+        }
+    }
+}
+
 int main() {
-    cout << "Hello, World!" << endl;
+    // Install standard binary operators.
+    // 1 is lowest precedence.
+    binaryOperatorPrecendence['<'] = 10;
+    binaryOperatorPrecendence['+'] = 20;
+    binaryOperatorPrecendence['-'] = 30;
+    binaryOperatorPrecendence['*'] = 40; // highest.
+
+    // Prime the first token.
+    fprintf(stderr, "ready> ");
+    getNextToken();
+
+    // Run the main loop
+    mainLoop();
+
     return 0;
 }
