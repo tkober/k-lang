@@ -26,60 +26,60 @@ static int getToken() {
     // Skip any whitespace
     while (isspace(lastCharacter)) {
         lastCharacter = getchar();
-
-        // [a-zA-Z][a-zA-Z0-9]*
-        if (isalpha(lastCharacter)) {
-            identifierString = lastCharacter;
-
-            while (isalnum((lastCharacter = getchar()))) {
-                identifierString += lastCharacter;
-            }
-
-            if (identifierString == "def") {
-                return token_def;
-            }
-
-            if (identifierString == "extern") {
-                return token_extern;
-            }
-
-            return token_identifier;
-        }
-
-        // [0-9.]+
-        if (isdigit(lastCharacter) || lastCharacter == '.') {
-            string numberString;
-
-            do {
-                numberString += lastCharacter;
-                lastCharacter = getchar();
-            } while (isdigit(lastCharacter) || lastCharacter == '.');
-
-            numberValue = strtod(numberString.c_str(), 0);
-            return token_number;
-        }
-
-        // comments
-        if (lastCharacter == '#') {
-            do {
-                lastCharacter = getchar();
-            } while (lastCharacter != EOF && lastCharacter != '\n' && lastCharacter != '\r');
-
-            if (lastCharacter != EOF) {
-                return getToken();
-            }
-        }
-
-        // EOF
-        if (lastCharacter == EOF) {
-            return token_eof;
-        }
-
-        // Everything else as its ascii value
-        int thisCharacter = lastCharacter;
-        lastCharacter = getchar();
-        return thisCharacter;
     }
+
+    // [a-zA-Z][a-zA-Z0-9]*
+    if (isalpha(lastCharacter)) {
+        identifierString = lastCharacter;
+
+        while (isalnum((lastCharacter = getchar()))) {
+            identifierString += lastCharacter;
+        }
+
+        if (identifierString == "def") {
+            return token_def;
+        }
+
+        if (identifierString == "extern") {
+            return token_extern;
+        }
+
+        return token_identifier;
+    }
+
+    // [0-9.]+
+    if (isdigit(lastCharacter) || lastCharacter == '.') {
+        string numberString;
+
+        do {
+            numberString += lastCharacter;
+            lastCharacter = getchar();
+        } while (isdigit(lastCharacter) || lastCharacter == '.');
+
+        numberValue = strtod(numberString.c_str(), 0);
+        return token_number;
+    }
+
+    // comments
+    if (lastCharacter == '#') {
+        do {
+            lastCharacter = getchar();
+        } while (lastCharacter != EOF && lastCharacter != '\n' && lastCharacter != '\r');
+
+        if (lastCharacter != EOF) {
+            return getToken();
+        }
+    }
+
+    // EOF
+    if (lastCharacter == EOF) {
+        return token_eof;
+    }
+
+    // Everything else as its ascii value
+    int thisCharacter = lastCharacter;
+    lastCharacter = getchar();
+    return thisCharacter;
 }
 
 /// ExpressionAst - base class for all expression nodes.
@@ -219,7 +219,7 @@ static unique_ptr<ExpressionAst> parseIdentifierExpression() {
     string identifierName = identifierString;
     getNextToken(); // consume the identifier
 
-    if (currentToken = !'(') {
+    if (currentToken != '(') {
         // result -> simple variable reference
         return make_unique<VariableExpressionAst>(identifierName);
     }
@@ -228,7 +228,7 @@ static unique_ptr<ExpressionAst> parseIdentifierExpression() {
     getNextToken(); // consume '('
     vector<unique_ptr<ExpressionAst>> arguments;
     if (currentToken != ')') {
-        while (1) {
+        while (true) {
             if (auto argument = parseExpression()) {
                 arguments.push_back(move(argument));
             } else {
@@ -275,7 +275,7 @@ static unique_ptr<ExpressionAst> parsePrimary() {
 /// binaryOperationRhs
 ///   ::= ('+', primary)*
 static unique_ptr<ExpressionAst> parseBinaryOperationRhs(int expresseionPrecendence, unique_ptr<ExpressionAst> lhs) {
-    while (1) {
+    while (true) {
         // Find operator precendence
         int tokenPrecendence = getTokenPrecendence();
 
@@ -287,6 +287,7 @@ static unique_ptr<ExpressionAst> parseBinaryOperationRhs(int expresseionPrecende
 
         // Okay, we know it is a binary operation
         int binaryOperation = currentToken;
+        getNextToken(); // consume binary operation
 
         // Parse the primary expression after the binary operator
         auto rhs = parsePrimary();
@@ -384,10 +385,38 @@ static unique_ptr<ExpressionAst> parseExpression() {
     return parseBinaryOperationRhs(0, move(lhs));
 }
 
+static void handleDefinition() {
+    if (parseDefinition()) {
+        fprintf(stderr, "Parsed a function definition.\n");
+    } else {
+        // Skip token for error recovery.
+        getNextToken();
+    }
+}
+
+static void handleExtern() {
+    if (parseExternal()) {
+        fprintf(stderr, "Parsed an extern\n");
+    } else {
+        // Skip token for error recovery.
+        getNextToken();
+    }
+}
+
+static void handleTopLevelExpression() {
+    // Evaluate a top-level expression into an anonymous function.
+    if (parseTopLevelExpression()) {
+        fprintf(stderr, "Parsed a top-level expression\n");
+    } else {
+        // Skip token for error recovery.
+        getNextToken();
+    }
+}
+
 /// top
 ///   ::= definition | external | expression | ';'
 static void mainLoop() {
-    while (1) {
+    while (true) {
         fprintf(stderr, "ready> ");
 
         switch (currentToken) {
@@ -400,15 +429,15 @@ static void mainLoop() {
                 break;
 
             case token_def:
-                parseDefinition();
+                handleDefinition();
                 break;
 
             case token_extern:
-                parseExternal();
+                handleExtern();
                 break;
 
             default:
-                parseTopLevelExpression();
+                handleTopLevelExpression();
                 break;
         }
     }
