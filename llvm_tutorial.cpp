@@ -2,7 +2,10 @@
 #include <vector>
 #include <map>
 
+#include "llvm/IR/Value.h"
+
 using namespace std;
+using llvm::Value;
 
 enum Token {
     token_eof = -1,
@@ -86,6 +89,7 @@ static int getToken() {
 class ExpressionAst {
 public:
     virtual ~ExpressionAst() {}
+    //virtual llvm::Value *codegen() =  0;
 };
 
 /// NumberExpressionAst - Expression class for all numeric literals like "1.0".
