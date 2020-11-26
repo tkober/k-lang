@@ -1,12 +1,5 @@
-<<<<<<< Updated upstream
 namespace de.kober.b;
-import "/Users/kober/code/k-lang/compiler/file_a"
-b_line 3
-b_line 4
-b_line 5
-=======
 import "/Users/kober/code/k-lang/compiler/file_a"
 b_line 1
 b_line 2
 b_line 3
->>>>>>> Stashed changes
