@@ -504,10 +504,6 @@ Function *FunctionAst::codegen() {
         return nullptr;
     }
 
-    if (function->empty()) {
-        return (Function *)logErrorV("Function cannot be redefined.");
-    }
-
     // Create a new basic block to start instertion into
     BasicBlock *basicBlock = BasicBlock::Create(*context, "entry", function);
     builder->SetInsertPoint(basicBlock);
@@ -547,7 +543,7 @@ static void initializeModule() {
 static void handleDefinition() {
     if (auto functionAst = parseDefinition()) {
         if (auto *functionIr = functionAst->codegen()) {
-            fprintf(stderr, "Read function definition:");
+            fprintf(stderr, "Read function definition:\n");
             functionIr->print(errs());
             fprintf(stderr, "\n");
         }
@@ -560,7 +556,7 @@ static void handleDefinition() {
 static void handleExtern() {
     if (auto prototypeAst = parseExternal()) {
         if (auto *prototypeIr = prototypeAst->codegen()) {
-            fprintf(stderr, "Read extern: ");
+            fprintf(stderr, "Read extern:\n");
             prototypeIr->print(errs());
             fprintf(stderr, "\n");
         }
@@ -574,7 +570,7 @@ static void handleTopLevelExpression() {
     // Evaluate a top-level expression into an anonymous function.
     if (auto expressionAst = parseTopLevelExpression()) {
         if (auto *expressionIr = expressionAst->codegen()) {
-            fprintf(stderr, "Read top-level expression:");
+            fprintf(stderr, "Read top-level expression:\n");
             expressionIr->print(errs());
             fprintf(stderr, "\n");
 
