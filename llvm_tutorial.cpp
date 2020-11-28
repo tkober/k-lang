@@ -1,11 +1,12 @@
-#include <iostream>
 #include <vector>
 #include <map>
 
 #include "llvm/IR/Value.h"
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Verifier.h"
 
 using namespace std;
-using llvm::Value;
+using namespace llvm;
 
 enum Token {
     token_eof = -1,
@@ -89,7 +90,7 @@ static int getToken() {
 class ExpressionAst {
 public:
     virtual ~ExpressionAst() {}
-    //virtual llvm::Value *codegen() =  0;
+    virtual Value *codegen() = 0;
 };
 
 /// NumberExpressionAst - Expression class for all numeric literals like "1.0".
@@ -98,6 +99,7 @@ class NumberExpressionAst : public ExpressionAst {
 
 public:
     NumberExpressionAst(double value) : value(value) {}
+    Value *codegen() override;
 };
 
 /// VariableExpressionAst - Expression class for referencing a variable like "foo".
@@ -106,6 +108,7 @@ class VariableExpressionAst : public ExpressionAst {
 
 public:
     VariableExpressionAst(const string &name) : name(name) {}
+    Value *codegen() override;
 };
 
 /// BinaryExpressionAst - Expression class for a binary operator.
@@ -118,6 +121,7 @@ public:
             : op(op),
               lhs(move(lhs)),
               rhs(move(rhs)) {}
+    Value *codegen() override;
 };
 
 // CallExpressionAst - Expression class for function calls.
@@ -129,6 +133,7 @@ public:
     CallExpressionAst(const string &callee, vector<unique_ptr<ExpressionAst>> arguments)
             : callee(callee),
               arguments(move(arguments)) {}
+    Value *codegen() override;
 };
 
 /// PrototypeAst - This class represents the "prototype" of a function,
@@ -143,6 +148,7 @@ public:
               arguments(move(arguments)) {}
 
     const string &getName() const { return name; }
+    Function *codegen();
 };
 
 /// FunctionAst - This class represents a function definition itself.
@@ -154,6 +160,8 @@ public:
     FunctionAst(unique_ptr<PrototypeAst> prototype, unique_ptr<ExpressionAst> body)
             : prototype(move(prototype)),
               body(move(body)) {}
+
+    Function *codegen();
 };
 
 /// currentToken / getNextToken - Provide a simple token buffer. currentToken  is the current token the parser is
@@ -389,9 +397,160 @@ static unique_ptr<ExpressionAst> parseExpression() {
     return parseBinaryOperationRhs(0, move(lhs));
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////   CODE GENERATION
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+static unique_ptr<LLVMContext> context;
+static unique_ptr<Module> module;
+static unique_ptr<IRBuilder<>> builder;
+static map<string, Value *>namedValues;
+
+Value * logErrorV(const char *message) {
+    logError(message);
+    return nullptr;
+}
+
+Value *NumberExpressionAst::codegen() {
+    return ConstantFP::get(*context, APFloat(value));
+}
+
+Value *VariableExpressionAst::codegen() {
+    Value *value = namedValues[name];
+    if (!value) {
+        logErrorV("Unknown variable name");
+    }
+    return value;
+}
+
+Value *BinaryExpressionAst::codegen() {
+    Value *lhsValue = lhs->codegen();
+    Value *rhsValue = rhs->codegen();
+
+    if (!lhsValue || !rhsValue) {
+        return nullptr;
+    }
+
+    Value *comparisonResult;
+    switch (op) {
+
+        case '+':
+            return builder->CreateFAdd(lhsValue, rhsValue, "addtmp");
+
+        case '-':
+            return builder->CreateAShr(lhsValue, rhsValue, "subtmp");
+
+        case '*':
+            return builder->CreateFMul(lhsValue, rhsValue, "multmp");
+
+        case '<':
+            comparisonResult = builder->CreateFCmpULT(lhsValue, rhsValue, "cpmtmp");
+            return builder->CreateUIToFP(comparisonResult, Type::getDoubleTy(*context), "booltmp");
+
+        default:
+            return logErrorV("Invalid binary operator");
+    }
+}
+
+Value *CallExpressionAst::codegen() {
+    // Look up the name in the global module table.
+    Function *calleeFunction = module->getFunction(callee);
+    if (!calleeFunction) {
+        return logErrorV("Unkown function referenced");
+    }
+
+    // Check argument count matching
+    if (calleeFunction->arg_size() != arguments.size()) {
+        return logErrorV("Mismatching argument count");
+    }
+
+    vector<Value *> argumentValues;
+    for (unsigned i = 0; i < arguments.size(); i++) {
+        argumentValues.push_back(arguments[i]->codegen());
+        if (!argumentValues.back()) {
+            return nullptr;
+        }
+    }
+
+    return builder->CreateCall(calleeFunction, argumentValues, "calltmp");
+}
+
+Function *PrototypeAst::codegen() {
+    // Make the function type double(double, ...)
+    vector<Type *> doubles(arguments.size(), Type::getDoubleTy(*context));
+    FunctionType *functionType = FunctionType::get(Type::getDoubleTy(*context), doubles, false);
+    Function *function = Function::Create(functionType, Function::ExternalLinkage, name, module.get());
+
+    // Set names for all arguments
+    unsigned i = 0;
+    for (auto &argument : function->args()) {
+        argument.setName(arguments[i]);
+        i++;
+    }
+
+    return function;
+}
+
+Function *FunctionAst::codegen() {
+    // Check for an existing function from a previous 'extern' declaration.
+    Function *function = module->getFunction(prototype->getName());
+
+    if (!function) {
+        // Otherwise generate the function prototyp
+        function = prototype->codegen();
+    }
+
+    if (!function) {
+        return nullptr;
+    }
+
+    if (function->empty()) {
+        return (Function *)logErrorV("Function cannot be redefined.");
+    }
+
+    // Create a new basic block to start instertion into
+    BasicBlock *basicBlock = BasicBlock::Create(*context, "entry", function);
+    builder->SetInsertPoint(basicBlock);
+
+    // Record the function arguments in the namedValues map.
+    namedValues.clear();
+    for (auto &argument : function->args()) {
+        namedValues[string(argument.getName())] = &argument;
+    }
+
+    if (Value *returnValue = body->codegen()) {
+        builder->CreateRet(returnValue);
+
+        // Validate the generated code, checking for consistency.
+        verifyFunction(*function);
+        return function;
+    }
+
+    // Error reading body, remove function.
+    function->eraseFromParent();
+    return nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////   TOP LEVEL PARSING
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+static void initializeModule() {
+    // Open a new context and module.
+    context = make_unique<LLVMContext>();
+    module = make_unique<Module>("my cool jit", *context);
+
+    // Create a new builder for the module.
+    builder = std::make_unique<IRBuilder<>>(*context);
+}
+
 static void handleDefinition() {
-    if (parseDefinition()) {
-        fprintf(stderr, "Parsed a function definition.\n");
+    if (auto functionAst = parseDefinition()) {
+        if (auto *functionIr = functionAst->codegen()) {
+            fprintf(stderr, "Read function definition:");
+            functionIr->print(errs());
+            fprintf(stderr, "\n");
+        }
     } else {
         // Skip token for error recovery.
         getNextToken();
@@ -399,8 +558,12 @@ static void handleDefinition() {
 }
 
 static void handleExtern() {
-    if (parseExternal()) {
-        fprintf(stderr, "Parsed an extern\n");
+    if (auto prototypeAst = parseExternal()) {
+        if (auto *prototypeIr = prototypeAst->codegen()) {
+            fprintf(stderr, "Read extern: ");
+            prototypeIr->print(errs());
+            fprintf(stderr, "\n");
+        }
     } else {
         // Skip token for error recovery.
         getNextToken();
@@ -409,8 +572,15 @@ static void handleExtern() {
 
 static void handleTopLevelExpression() {
     // Evaluate a top-level expression into an anonymous function.
-    if (parseTopLevelExpression()) {
-        fprintf(stderr, "Parsed a top-level expression\n");
+    if (auto expressionAst = parseTopLevelExpression()) {
+        if (auto *expressionIr = expressionAst->codegen()) {
+            fprintf(stderr, "Read top-level expression:");
+            expressionIr->print(errs());
+            fprintf(stderr, "\n");
+
+            // Remove the anonymous expression.
+            expressionIr->eraseFromParent();
+        }
     } else {
         // Skip token for error recovery.
         getNextToken();
@@ -459,8 +629,14 @@ int main() {
     fprintf(stderr, "ready> ");
     getNextToken();
 
+    // Make the module, which holds all the code.
+    initializeModule();
+
     // Run the main loop
     mainLoop();
+
+    // Print out all of the generated code.
+    module->print(errs(), nullptr);
 
     return 0;
 }
