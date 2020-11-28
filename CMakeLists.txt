@@ -11,6 +11,7 @@ message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 
 include_directories(${LLVM_INCLUDE_DIRS})
+include_directories("/usr/local/lib/cmake/llvm")
 add_definitions(${LLVM_DEFINITIONS})
 
 project(llvm_tutorial)
