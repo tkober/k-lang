@@ -1,9 +1,12 @@
 #include <vector>
 #include <map>
+#include <llvm/Transforms/InstCombine/InstCombine.h>
+#include <llvm/Transforms/Scalar.h>
 
 #include "llvm/IR/Value.h"
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Verifier.h"
+#include "llvm/IR/LegacyPassManager.h"
 
 using namespace std;
 using namespace llvm;
@@ -405,6 +408,7 @@ static unique_ptr<LLVMContext> context;
 static unique_ptr<Module> module;
 static unique_ptr<IRBuilder<>> builder;
 static map<string, Value *>namedValues;
+static unique_ptr<legacy::FunctionPassManager> functionPassManager;
 
 Value * logErrorV(const char *message) {
     logError(message);
@@ -519,6 +523,10 @@ Function *FunctionAst::codegen() {
 
         // Validate the generated code, checking for consistency.
         verifyFunction(*function);
+
+        // Perform optimizations
+        functionPassManager->run(*function);
+
         return function;
     }
 
@@ -531,13 +539,24 @@ Function *FunctionAst::codegen() {
 /////////   TOP LEVEL PARSING
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static void initializeModule() {
+static void initializeModuleAndPassManager() {
     // Open a new context and module.
     context = make_unique<LLVMContext>();
     module = make_unique<Module>("my cool jit", *context);
 
     // Create a new builder for the module.
     builder = std::make_unique<IRBuilder<>>(*context);
+
+    // Create a new pass manager attached to our module
+    functionPassManager = make_unique<legacy::FunctionPassManager>(module.get());
+
+    // Add optimization passes
+    functionPassManager->add(createInstructionCombiningPass());
+    functionPassManager->add(createReassociatePass());
+    functionPassManager->add(createNewGVNPass());
+    functionPassManager->add(createCFGSimplificationPass());
+
+    functionPassManager->doInitialization();
 }
 
 static void handleDefinition() {
@@ -626,7 +645,7 @@ int main() {
     getNextToken();
 
     // Make the module, which holds all the code.
-    initializeModule();
+    initializeModuleAndPassManager();
 
     // Run the main loop
     mainLoop();

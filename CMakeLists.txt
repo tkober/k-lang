@@ -17,7 +17,7 @@ add_definitions(${LLVM_DEFINITIONS})
 project(llvm_tutorial)
 add_executable(llvm_tutorial llvm_tutorial.cpp)
 
-llvm_map_components_to_libnames(llvm_libs support core irreader)
+llvm_map_components_to_libnames(llvm_libs support core irreader ScalarOpts)
 
 # Link against LLVM libraries
 target_link_libraries(llvm_tutorial ${llvm_libs})
